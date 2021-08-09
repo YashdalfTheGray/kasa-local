@@ -17,7 +17,9 @@
     "removeComments": false,
     "noLib": false,
     "preserveConstEnums": true,
-    "suppressImplicitAnyIndexErrors": true
+    "suppressImplicitAnyIndexErrors": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true
   },
   "filesGlob": ["./src/**/*.ts"],
   "exclude": ["node_modules"],
