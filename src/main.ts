@@ -34,11 +34,19 @@ client
         alias: deviceInfo.alias,
       });
     }
+
+    console.log(`Found new device on host ${device.host}`);
   })
   .startDiscovery();
 
+client.on('error', (e) => {
+  console.error(e);
+});
+client.on('discovery-invalid', (e) => {
+  console.error(e);
+});
+
 const intervalHandler = setInterval(() => {
-  // tslint:disable-next-line:no-console
   console.log('Restarting discovery');
   client.stopDiscovery();
   client.startDiscovery();
@@ -76,12 +84,10 @@ app.post(
 );
 
 app.listen(port, () => {
-  // tslint:disable-next-line:no-console
   console.log(`Server running on ${port}`);
 });
 
 process.on('exit', () => {
-  // tslint:disable-next-line:no-console
   console.log(`Gracefully shutting down server`);
   clearInterval(intervalHandler);
   client.stopDiscovery();

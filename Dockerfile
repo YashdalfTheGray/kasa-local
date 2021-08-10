@@ -2,6 +2,8 @@ FROM node:lts
 
 ARG PORT=8080
 
+ENV PORT=${PORT}
+
 # Create app directory
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
@@ -15,4 +17,4 @@ COPY . /usr/src/app
 
 EXPOSE ${PORT}
 
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "start:prod" ]
