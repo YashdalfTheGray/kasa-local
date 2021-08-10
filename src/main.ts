@@ -69,6 +69,20 @@ app.get(
   })
 );
 
+app.get(
+  '/device-status',
+  wrap(async (req, res) => {
+    try {
+      const { hostAddress } = req.body;
+      const device = await client.getDevice({ host: hostAddress });
+      const state = await device.getPowerState();
+      res.json({ host: device.host, alias: device.alias, state });
+    } catch {
+      res.sendStatus(500);
+    }
+  })
+);
+
 app.post(
   '/device-toggle',
   wrap(async (req, res) => {
